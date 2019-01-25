@@ -1,27 +1,32 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_weather_demo/CityWidget.dart';
 import 'package:flutter_weather_demo/WeatherData.dart';
 import 'package:http/http.dart' as http;
 
 class WeatherWidget extends StatefulWidget {
+  final String cityName;
+
+  WeatherWidget(this.cityName);
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return new WeatherState();
+    return new WeatherState(cityName);
   }
 }
 
 class WeatherState extends State<WeatherWidget> {
   WeatherData weatherData = WeatherData.empty();
 
-  WeatherState() {
-    _getWeather('广州');
+  WeatherState(cityName) {
+    _getWeather(cityName);
   }
 
   //异步获取天气信息
   void _getWeather(city) async {
-    print('点我了');
+    print(city + "的天气");
     WeatherData data = await _fetchWeatherData(city);
     //获取到信息后，设置状态刷新页面
     setState(() {
@@ -60,11 +65,19 @@ class WeatherState extends State<WeatherWidget> {
               new Container(
                 width: double.infinity,
                 margin: EdgeInsets.only(top: 50.0),
-                child: new Text(
-                  weatherData.city,
-                  textAlign: TextAlign.center,
-                  style: new TextStyle(color: Colors.white, fontSize: 30.0),
-                ),
+                child: new FlatButton(
+                    child: Text(weatherData.city,
+                        style:
+                            new TextStyle(color: Colors.white, fontSize: 30.0)),
+                    onPressed: () {
+                      Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CityWidget()))
+                          .then((newCityName) {
+                            _getWeather(newCityName);
+                      });
+                    }),
               ),
               new Container(
                 width: double.infinity,
@@ -89,7 +102,7 @@ class WeatherState extends State<WeatherWidget> {
                                 color: Colors.white, fontSize: 25.0)),
                         onPressed: () {
 //                          showAlertDialog(context);
-                          _getWeather('深圳');
+                          _getWeather(weatherData.city);
                         }),
                   ],
                 ),

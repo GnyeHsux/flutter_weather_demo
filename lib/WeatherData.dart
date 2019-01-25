@@ -9,7 +9,7 @@ class WeatherData {
 
   factory WeatherData.fromJson(Map<String, dynamic> json) {
     return WeatherData(
-        city: json['HeWeather6'][0]['basic']['admin_area'] + json['HeWeather6'][0]['basic']['location'],
+        city: json['HeWeather6'][0]['basic']['location'],
         cond: json['HeWeather6'][0]['now']['cond_txt'],
         tmp: json['HeWeather6'][0]['now']['tmp'] + "°",
         hum: "湿度  " + json['HeWeather6'][0]['now']['hum'] + "%" + " " +

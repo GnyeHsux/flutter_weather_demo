@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_weather_demo/CityWidget.dart';
 import 'package:flutter_weather_demo/WeatherWidget.dart';
 
 void main() => runApp(MyApp());
@@ -21,7 +22,8 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: WeatherWidget(),
+//      home: WeatherWidget('广州'),
+    home: CityWidget(),
     );
   }
 }
