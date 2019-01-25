@@ -63,22 +63,24 @@ class WeatherState extends State<WeatherWidget> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               new Container(
-                width: double.infinity,
-                margin: EdgeInsets.only(top: 50.0),
-                child: new FlatButton(
-                    child: Text(weatherData.city,
-                        style:
-                            new TextStyle(color: Colors.white, fontSize: 30.0)),
-                    onPressed: () {
+                  width: double.infinity,
+                  margin: EdgeInsets.only(top: 50.0),
+                  child: GestureDetector(
+                    child: new Text(
+                      weatherData.city,
+                      textAlign: TextAlign.center,
+                      style: new TextStyle(color: Colors.white, fontSize: 30.0),
+                    ),
+                    onTap: () {
                       Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => CityWidget()))
                           .then((newCityName) {
-                            _getWeather(newCityName);
+                        _getWeather(newCityName);
                       });
-                    }),
-              ),
+                    },
+                  )),
               new Container(
                 width: double.infinity,
                 margin: EdgeInsets.only(top: 280.0),
