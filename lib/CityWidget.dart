@@ -42,49 +42,27 @@ class CityState extends State<CityWidget> {
 
   @override
   Widget build(BuildContext context) {
-    /*return Scaffold(
-      appBar: AppBar(
-        title: Text("选择城市"),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            ListView.builder(
-              itemCount: cityList.length,
-              itemBuilder: (context, index) {
+    return
+      Material(
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text("选择城市"),
+          ),
+          body: ListView.builder(
+            itemCount: cityList.length,
+            itemBuilder: (context, index) {
 
-                return ListTile(
-                  title: GestureDetector(
-                    child: Text(cityList[index].cityName),
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => WeatherWidget(cityList[index].cityName))
-                      );
-                    },
-                  ),
-                );
-              },
-            )
-          ],
-        ),
-      ),
-    );*/
-    return ListView.builder(
-        itemCount: cityList.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: GestureDetector(
-              child: Text(cityList[index].cityName),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            WeatherWidget(cityList[index].cityName)));
-              },
-            ),
-          );
-        });
+              return ListTile(
+                title: GestureDetector(
+                  child: Text(cityList[index].cityName),
+                  onTap: () {
+                    Navigator.pop(context, cityList[index].cityName);
+                  },
+                ),
+              );
+            },
+          )
+        )
+      );
   }
 }
